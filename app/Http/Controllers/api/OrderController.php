@@ -34,7 +34,38 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'iduser' => 'required',
+            'total' => 'required',
+            'pizzas' => 'required',
+            'listPizza' => 'required|array'
+        ]);
+
+        DB::beginTransaction();
+        $order = Order::create([
+            'user_id' => $request['iduser'],
+            'total' => $request['total'],
+            'pizzas' => $request['pizzas']
+        ]);
+
+        $listPizzas = $request['listPizza'];
+        $countListPizzas = count($listPizzas);
+        for($i = 0; $i < $countListPizzas; $i ++){
+            $order_detail = Order_Detail::create([
+                'order_id' => $order->id,
+                'pizza_id' => $listPizzas[$i]['id'],
+                'price' => $listPizzas[$i]['price']
+            ]);
+        }
+
+        if($order && $order_detail){
+            DB::commit();
+            return ['message' => 'Se ha creado tu nueva order','order_id' => $order_detail->id];
+        } else {
+            DB::rollBack();
+            return ['message' => 'Se ha presetado un problema al crear tu orden'];
+        }
+
     }
 
     /**

@@ -3,7 +3,7 @@
         <td>{{this.pizza}}</td>
         <td>{{this.price}}</td>
         <td>
-            <button class="btn btn-danger btn-sm" @click="revoveItemOder()"><span class="fas fa-times"></span></button>
+            <!--Creacion funciones de eliminación para un caso más real -->
         </td>
     </tr>
 </template>
@@ -23,15 +23,17 @@ export default {
         price: Number,
     },
     methods:{
-        revoveItemOder(){
-            this.form.delete('api/order/'+this.id)
-            .then((res) =>{
-                console.log(res)
-                this.visible = false
-            }).catch((err) => {
-                console.warn(err)
-            })
-        }
+        // El siguiente codigo se implementaria en caso de que un usuario quisiera 
+        // eliminar una orden, en este caso solo se quieren observar
+        // revoveItemOder(){
+        //     this.form.delete('api/order/'+this.id)
+        //     .then((res) =>{
+        //         console.log(res)
+        //         this.visible = false
+        //     }).catch((err) => {
+        //         console.warn(err)
+        //     })
+        // }
     }
 }
 </script>

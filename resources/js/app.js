@@ -4,6 +4,14 @@ require('./bootstrap');
 window.Vue = require('vue');
 //Imports ::
 
+//Gate
+import Gate from './Gate.js';
+Vue.prototype.$gate = new Gate(window.user);
+
+//Toastr
+import toastr from 'toastr'
+window.toastr = toastr;
+
 //vForm
 import { Form, HasError, AlertError } from 'vform';
 window.Form = Form;
@@ -12,6 +20,7 @@ Vue.component(AlertError.name, AlertError);
 
 //Moments
 import moment from 'moment';
+moment.locale('es');
 Vue.filter('timeDate', function(created){
     return moment(created).format('MMMM Do YYYY');
  })

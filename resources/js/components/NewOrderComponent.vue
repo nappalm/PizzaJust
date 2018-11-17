@@ -14,17 +14,12 @@
                         <small>Presiona para agregar a pedido</small>
                     </div>
                     <div class="__body-pizzas d-flex">
-                        <!-- <button class="btn btn-dark btn-sm mr-2" 
-                        v-for="pizza in pizzasOn" :key="pizza.id"
-                        @click="addtoOrder(pizza)">
-                        {{pizza.name_pizza}} $ {{pizza.price}}
-                        </button> -->
                         <div class="container_item_pizza d-fill text-center"
                         v-for="pizza in pizzasOn" :key="pizza.id"
                         @click="addtoOrder(pizza)">
                             <img src="img/pizza_item.png">
                             <label class="pizza_name d-block">{{pizza.name_pizza}} </label>
-                            <small class="label-bold">$ {{pizza.price}}</small>
+                            <label class="label-bold">$ {{pizza.price}}</label>
                         </div>
                     </div>
                 </div>
@@ -47,20 +42,21 @@
                 <h5>Detalle de caja</h5>
                 <!-- <input type="hidden" name="" id="valueid_profile" :value="$gate.idProfile()" ref="idvalue"> -->
                 <div class="form-group">
-                    <label for="username">Cajero</label>
-                    <input type="text" class="form-control" id="username" readonly>
+                    <label for="profile">Cajero</label>
+                    <input type="text" :value="$gate.nameProfile()" class="form-control" id="profile" readonly>
                 </div>
                 <div class="form-group">
-                    <label for="username">Total de pizzas</label>
-                    <input type="text" class="form-control" id="username" :value="countPizza" readonly>
+                    <label for="pizzas">Total de pizzas</label>
+                    <input type="text" class="form-control" id="pizzas" :value="countPizza" readonly>
                 </div>
 
                 <div class="__pay">
                     <div class="form-group">
-                        <label for="username">Total a pagar</label>
-                        <input type="text" class="form-control" id="username" :value="countTotal" readonly>
+                        <label for="mont">Total a pagar</label>
+                        <input type="text" class="form-control" id="mont" :value="countTotal" readonly>
                     </div>
-                    <button class="btn btn-lg btn-success">Procesar pago</button>
+                    <p>Para cobrar la venta asegurate de que hayas seleccionado las pizzas correctamente.</p>
+                    <button class="btn btn-lg btn-success" v-if="form.listPizza.length > 0" :disabled="form.busy" @click="storeOrder()">Procesar pago</button>
                 </div>
 
             </div>
@@ -80,6 +76,14 @@ export default {
                 pizzas: 0,
                 listPizza: []
             }),
+        }
+    },
+    watch:{
+        countPizza: function() {
+            this.form.pizzas = this.countPizza
+        },
+        countTotal: function() {
+            this.form.total = this.countTotal
         }
     },
     created(){
@@ -103,6 +107,19 @@ export default {
             this.form.listPizza.splice(index, 1)
              this.countPizza --
              this.countTotal -= pizza.price
+        },
+        storeOrder(){
+            this.form.post('api/order')
+            .then(({data}) => {
+                // console.log(res)
+                toastr.success(data.message)
+                this.form.reset()
+                this.countPizza = 0
+                this.countTotal = 0
+            })
+            .catch((err) => {
+                console.log(err)
+            })
         }
     }
 }

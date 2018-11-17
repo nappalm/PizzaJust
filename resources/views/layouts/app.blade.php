@@ -26,4 +26,9 @@
         </main>
     </div>
 </body>
+@auth
+<script>
+    window.user = @json(auth()->user())
+</script>
+@endauth
 </html>
