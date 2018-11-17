@@ -32,7 +32,7 @@
         </div>
     </div>
 </nav>
-<div class="container-fluid pt-5">
+<div class="container-fluid">
     <router-view></router-view>
 </div> 
 @endsection

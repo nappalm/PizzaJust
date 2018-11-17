@@ -24,6 +24,13 @@ label.label-bold {
   padding: 10px;
 }
 
+.nav-controls {
+  background-color: #fff6dc;
+  border-bottom: 2px solid #ffdd77;
+  padding: 10px 0;
+  margin-bottom: 10px;
+}
+
 .nav-pizza-dashboard {
   background-color: #333333 !important;
   padding: 0 16px;

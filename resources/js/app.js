@@ -20,7 +20,7 @@ Vue.filter('timeDate', function(created){
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 let routes = [
-
+    { path: '/orders',  component: require('./components/OrderListComponent.vue') },
 ]
 
 const router = new VueRouter({
@@ -30,6 +30,7 @@ const router = new VueRouter({
 
 //Componentes ::
 // Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('row-item-order', require('./components/OrderItemComponent.vue'));
 const app = new Vue({
     el: '#app',
     router
