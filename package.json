@@ -24,6 +24,7 @@
         "moment": "^2.22.2",
         "toastr": "^2.1.4",
         "vform": "^1.0.0",
-        "vue-router": "^3.0.1"
+        "vue-router": "^3.0.1",
+        "vue-spinner": "^1.0.3"
     }
 }

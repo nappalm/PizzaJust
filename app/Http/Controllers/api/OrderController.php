@@ -45,7 +45,9 @@ class OrderController extends Controller
         $order = Order::create([
             'user_id' => $request['iduser'],
             'total' => $request['total'],
-            'pizzas' => $request['pizzas']
+            'pizzas' => $request['pizzas'],
+            // 'created_at' => date('Y-m-d H:i:s'),
+            // 'updated_at' => date('Y-m-d H:i:s')
         ]);
 
         $listPizzas = $request['listPizza'];
@@ -54,7 +56,9 @@ class OrderController extends Controller
             $order_detail = Order_Detail::create([
                 'order_id' => $order->id,
                 'pizza_id' => $listPizzas[$i]['id'],
-                'price' => $listPizzas[$i]['price']
+                'price' => $listPizzas[$i]['price'],
+                // 'created_at' => date('Y-m-d H:i:s'),
+                // 'updated_at' => date('Y-m-d H:i:s')
             ]);
         }
 

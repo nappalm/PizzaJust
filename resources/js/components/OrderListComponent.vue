@@ -8,7 +8,17 @@
             </div>
         </div>
         <div class="col-sm-6">
-            <h5>Ordenes en lista</h5>
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <h5 >
+                    Ordenes en lista
+                    </h5>
+                </li>
+                <li class="list-inline-item">
+                    <pulse-loader :loading="loading" :color="'#3f4a54'" :size="'20px'"></pulse-loader>
+                </li>
+            </ul>
+            
             <table class="table">
                 <thead>
                     <td># orden</td>
@@ -59,29 +69,46 @@ export default {
             emptyOrder: true,
             listOrders: {},
             listOrderData: {},
+            loading: false,
         }
     },
     methods: {
-        clickOrder(order){
-            this.emptyOrder = false
-            axios.get('api/order/'+order.id)
-            .then(({data}) => {
-               this.listOrderData = data
-            })
-            .catch((err) => {
-                console.warn(err)
-            })
+        async clickOrder(order){
+            this.loading = true
+            try {
+                this.emptyOrder = false
+                axios.get('api/order/'+order.id)
+                .then(({data}) => {
+                    this.listOrderData = data
+                    this.loading = false
+                })
+                .catch((err) => {
+                    console.warn(err)
+                })
+            }catch (error) {
+                console.error(error);
+            }
+        },
+        async loadingOrders(){
+            this.loading = true
+            try {
+            axios.get('api/order')
+                .then(({data}) => {
+                    this.listOrders = data
+                    this.loading = false
+                })
+                .catch((err) =>{
+                    console.warn(err)
+                })  
+            }catch (error) {
+                console.error(error);
+            }
+            
         }
         
     },
     created(){
-    axios.get('api/order')
-        .then(({data}) => {
-            this.listOrders = data
-        })
-        .catch((err) =>{
-            console.warn(err)
-        })  
+        this.loadingOrders()
     }
 }
 </script>

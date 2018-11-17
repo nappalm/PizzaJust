@@ -12,6 +12,10 @@ Vue.prototype.$gate = new Gate(window.user);
 import toastr from 'toastr'
 window.toastr = toastr;
 
+//Loader
+import PulseLoader from 'vue-spinner/src/MoonLoader.vue'
+Vue.component('pulse-loader', PulseLoader);
+
 //vForm
 import { Form, HasError, AlertError } from 'vform';
 window.Form = Form;

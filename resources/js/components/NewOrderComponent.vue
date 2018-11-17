@@ -1,6 +1,5 @@
 <template>
     <div>
-        <!-- <pre>{{$data.form}}</pre> -->
         <div class="row">
             <div class="col-sm-12 d-flex justify-content-between nav-controls">
                 <h5>Crear nueva ordén</h5>
@@ -14,6 +13,7 @@
                         <small>Presiona para agregar a pedido</small>
                     </div>
                     <div class="__body-pizzas d-flex">
+                        <pulse-loader :loading="loading" :color="'#3f4a54'" :size="'20px'"></pulse-loader>
                         <div class="container_item_pizza d-fill text-center"
                         v-for="pizza in pizzasOn" :key="pizza.id"
                         @click="addtoOrder(pizza)">
@@ -56,7 +56,14 @@
                         <input type="text" class="form-control" id="mont" :value="countTotal" readonly>
                     </div>
                     <p>Para cobrar la venta asegurate de que hayas seleccionado las pizzas correctamente.</p>
-                    <button class="btn btn-lg btn-success" v-if="form.listPizza.length > 0" :disabled="form.busy" @click="storeOrder()">Procesar pago</button>
+                    <button class="btn btn-lg btn-success list-inline" v-if="form.listPizza.length > 0" :disabled="form.busy" @click="storeOrder()">
+                    <li class="list-inline-item">
+                    <pulse-loader :loading="form.busy" :color="'#ffdd77'" :size="'20px'"></pulse-loader>
+                    </li>
+                    <li class="list-inline-item">
+                    Procesar pago
+                    </li>
+                    </button>
                 </div>
 
             </div>
@@ -70,8 +77,9 @@ export default {
             pizzasOn: {},
             countPizza: 0,
             countTotal: 0,
+            loading: false,
             form: new Form({
-                iduser: 1,
+                iduser: user.id,
                 total: 0,
                 pizzas: 0,
                 listPizza: []
@@ -87,13 +95,7 @@ export default {
         }
     },
     created(){
-        axios.get('api/pizza')
-        .then(({data}) => {
-           this.pizzasOn = data.data
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+       this.loadPizzasList()
     },
     methods:{
         addtoOrder(pizza){
@@ -120,6 +122,21 @@ export default {
             .catch((err) => {
                 console.log(err)
             })
+        },
+        async loadPizzasList(){
+           this.loading = true
+            try {
+                axios.get('api/pizza')
+                .then(({data}) => {
+                    this.pizzasOn = data.data
+                    this.loading = false
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+            }catch (error) {
+                console.error(error);
+            }
         }
     }
 }
