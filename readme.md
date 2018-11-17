@@ -3,8 +3,8 @@
 ## Practica Pizza
 ## Pasos de configuración
 Pasos ::
-npm install
-composer instal
+1.- npm install
+2.- composer install
 
 composer dump-autoload
 php artisan migrate
