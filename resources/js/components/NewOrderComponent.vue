@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!-- <pre>{{$data.form}}</pre> -->
         <div class="row">
             <div class="col-sm-12 d-flex justify-content-between nav-controls">
                 <h5>Crear nueva ordén</h5>
@@ -12,24 +13,32 @@
                         <br>
                         <small>Presiona para agregar a pedido</small>
                     </div>
-                    <div class="__body-pizzas">
-                        <button class="btn btn-dark btn-sm mr-2" 
+                    <div class="__body-pizzas d-flex">
+                        <!-- <button class="btn btn-dark btn-sm mr-2" 
                         v-for="pizza in pizzasOn" :key="pizza.id"
-                        @click="addtoOder(pizza)">
+                        @click="addtoOrder(pizza)">
                         {{pizza.name_pizza}} $ {{pizza.price}}
-                        </button>
+                        </button> -->
+                        <div class="container_item_pizza d-fill text-center"
+                        v-for="pizza in pizzasOn" :key="pizza.id"
+                        @click="addtoOrder(pizza)">
+                            <img src="img/pizza_item.png">
+                            <label class="pizza_name d-block">{{pizza.name_pizza}} </label>
+                            <small class="label-bold">$ {{pizza.price}}</small>
+                        </div>
                     </div>
                 </div>
                 <table class="table">
                     <thead>
-                        <td>#</td>
                         <td>Pizza</td>
                         <td>Monto</td>
                         <td></td>
                     </thead>
                     <tbody>
-                        <tr v-for="pizza in form.listPizza" :key="pizza.id">
-                            
+                        <tr v-for="(pizza, index) in form.listPizza" :key="index">
+                            <td>{{pizza.name_pizza}}</td>
+                            <td>{{pizza.price}}</td>
+                            <td><button class="btn btn-sm btn-danger" @click="removeOrder(pizza)"><span class="fas fa-times"></span> Remover</button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -66,6 +75,9 @@ export default {
             countPizza: 0,
             countTotal: 0,
             form: new Form({
+                iduser: 1,
+                total: 0,
+                pizzas: 0,
                 listPizza: []
             }),
         }
@@ -80,11 +92,17 @@ export default {
         })
     },
     methods:{
-        addtoOder(pizza){
+        addtoOrder(pizza){
             console.log(pizza)
             this.form.listPizza.push(pizza)
             this.countPizza ++
             this.countTotal += pizza.price
+        },
+        removeOrder: function (pizza) {
+            var index = this.form.listPizza.indexOf(pizza)
+            this.form.listPizza.splice(index, 1)
+             this.countPizza --
+             this.countTotal -= pizza.price
         }
     }
 }
@@ -102,6 +120,15 @@ export default {
     }
     .__container-pizzas .__body-pizzas{
         padding: 10px 0;
+    }
+    .container_item_pizza{
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #3f4a54;
+        cursor: pointer;
+        margin-right: 2px;
+        background-color: #ffdd77;
+        min-width: 100px;
     }
 </style>
 

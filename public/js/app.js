@@ -68510,6 +68510,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -68518,6 +68527,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             countPizza: 0,
             countTotal: 0,
             form: new Form({
+                iduser: 1,
+                total: 0,
+                pizzas: 0,
                 listPizza: []
             })
         };
@@ -68535,11 +68547,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        addtoOder: function addtoOder(pizza) {
+        addtoOrder: function addtoOrder(pizza) {
             console.log(pizza);
             this.form.listPizza.push(pizza);
             this.countPizza++;
             this.countTotal += pizza.price;
+        },
+
+        removeOrder: function removeOrder(pizza) {
+            var index = this.form.listPizza.indexOf(pizza);
+            this.form.listPizza.splice(index, 1);
+            this.countPizza--;
+            this.countTotal -= pizza.price;
         }
     }
 });
@@ -68564,27 +68583,29 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "__body-pizzas" },
+            { staticClass: "__body-pizzas d-flex" },
             _vm._l(_vm.pizzasOn, function(pizza) {
               return _c(
-                "button",
+                "div",
                 {
                   key: pizza.id,
-                  staticClass: "btn btn-dark btn-sm mr-2",
+                  staticClass: "container_item_pizza d-fill text-center",
                   on: {
                     click: function($event) {
-                      _vm.addtoOder(pizza)
+                      _vm.addtoOrder(pizza)
                     }
                   }
                 },
                 [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(pizza.name_pizza) +
-                      " $ " +
-                      _vm._s(pizza.price) +
-                      "\n                    "
-                  )
+                  _c("img", { attrs: { src: "img/pizza_item.png" } }),
+                  _vm._v(" "),
+                  _c("label", { staticClass: "pizza_name d-block" }, [
+                    _vm._v(_vm._s(pizza.name_pizza) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("small", { staticClass: "label-bold" }, [
+                    _vm._v("$ " + _vm._s(pizza.price))
+                  ])
                 ]
               )
             })
@@ -68596,8 +68617,30 @@ var render = function() {
           _vm._v(" "),
           _c(
             "tbody",
-            _vm._l(_vm.form.listPizza, function(pizza) {
-              return _c("tr", { key: pizza.id })
+            _vm._l(_vm.form.listPizza, function(pizza, index) {
+              return _c("tr", { key: index }, [
+                _c("td", [_vm._v(_vm._s(pizza.name_pizza))]),
+                _vm._v(" "),
+                _c("td", [_vm._v(_vm._s(pizza.price))]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-sm btn-danger",
+                      on: {
+                        click: function($event) {
+                          _vm.removeOrder(pizza)
+                        }
+                      }
+                    },
+                    [
+                      _c("span", { staticClass: "fas fa-times" }),
+                      _vm._v(" Remover")
+                    ]
+                  )
+                ])
+              ])
             })
           )
         ])
@@ -68670,8 +68713,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("thead", [
-      _c("td", [_vm._v("#")]),
-      _vm._v(" "),
       _c("td", [_vm._v("Pizza")]),
       _vm._v(" "),
       _c("td", [_vm._v("Monto")]),
@@ -68737,7 +68778,7 @@ exports = module.exports = __webpack_require__(169)(false);
 
 
 // module
-exports.push([module.i, "\n.__container-pizzas{\n    padding: 10px 10px;\n    background: #eee;\n    border-radius: 5px;\n    border-bottom: 2px solid #ffdd77;\n}\n.__container-pizzas  .__header-pizzas{\n    padding: 5px;\n}\n.__container-pizzas .__body-pizzas{\n    padding: 10px 0;\n}\n", ""]);
+exports.push([module.i, "\n.__container-pizzas{\n    padding: 10px 10px;\n    background: #eee;\n    border-radius: 5px;\n    border-bottom: 2px solid #ffdd77;\n}\n.__container-pizzas  .__header-pizzas{\n    padding: 5px;\n}\n.__container-pizzas .__body-pizzas{\n    padding: 10px 0;\n}\n.container_item_pizza{\n    padding: 5px;\n    border-radius: 5px;\n    border: 1px solid #3f4a54;\n    cursor: pointer;\n    margin-right: 2px;\n    background-color: #ffdd77;\n    min-width: 100px;\n}\n", ""]);
 
 // exports
 
