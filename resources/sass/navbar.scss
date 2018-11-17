@@ -1,0 +1,39 @@
+.router-link-exact-active{
+    background: #ffdd77;
+    color: #333333 !important;
+  }
+  
+  .nav-pizza {
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      padding: 10px;
+    }
+  
+    .nav-pizza-dashboard{
+      background-color: #333333 !important;
+      padding: 0 16px;
+      z-index: 1000;
+      margin-bottom: 0;
+      min-height: 40px;
+      border: 0;
+      border-bottom: 1px solid #e5e5e5;
+      position: fixed;
+    }
+  
+    .nav-pizza-dashboard .nav-item{
+      line-height: 1;
+    }
+  
+    .nav-pizza-dashboard .navbar-nav li .nav-s-item{
+      color: #999;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 3px;
+      margin: 0 2px;
+      &:hover{
+        transition: .3s;
+        background: #ffdd77;
+        color: #333333 !important;
+      }
+    }
