@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Pizza;
 
 class PizzaController extends Controller
 {
@@ -14,7 +15,7 @@ class PizzaController extends Controller
      */
     public function index()
     {
-        //
+        return Pizza::latest()->paginate(50);
     }
 
     /**

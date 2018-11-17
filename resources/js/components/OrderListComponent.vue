@@ -41,13 +41,6 @@
                     <td width="50"></td>
                 </thead>
                 <tbody>
-                    <!-- <tr v-for="order in listOrderData" :key="order.id">
-                        <td>{{order.pizza}}</td>
-                        <td>{{order.price}}</td>
-                        <td v-if="removeOrdersData">
-                            <button class="btn btn-danger btn-sm" @click="revoveItemOder(order)"><span class="fas fa-times"></span></button>
-                        </td>
-                    </tr> -->
                     <row-item-order v-for="order in listOrderData" :key="order.id"
                     :id="order.id"
                     :pizza="order.pizza"

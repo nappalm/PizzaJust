@@ -20,7 +20,8 @@ Vue.filter('timeDate', function(created){
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 let routes = [
-    { path: '/orders',  component: require('./components/OrderListComponent.vue') },
+    { path: '/orders',      component: require('./components/OrderListComponent.vue') },
+    { path: '/neworder',    component: require('./components/NewOrderComponent.vue') },
 ]
 
 const router = new VueRouter({

@@ -30308,7 +30308,7 @@ Vue.filter('timeDate', function (created) {
 //VueRouter
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]);
-var routes = [{ path: '/orders', component: __webpack_require__(182) }];
+var routes = [{ path: '/orders', component: __webpack_require__(182) }, { path: '/neworder', component: __webpack_require__(193) }];
 
 var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
     mode: 'history',
@@ -67763,13 +67763,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -68399,6 +68392,355 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-127a4a27", module.exports)
   }
 }
+
+/***/ }),
+/* 193 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(196)
+}
+var normalizeComponent = __webpack_require__(183)
+/* script */
+var __vue_script__ = __webpack_require__(194)
+/* template */
+var __vue_template__ = __webpack_require__(195)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/NewOrderComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-cccc4e98", Component.options)
+  } else {
+    hotAPI.reload("data-v-cccc4e98", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 194 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            pizzasOn: {},
+            countPizza: 0,
+            countTotal: 0,
+            form: new Form({
+                listPizza: []
+            })
+        };
+    },
+    created: function created() {
+        var _this = this;
+
+        axios.get('api/pizza').then(function (_ref) {
+            var data = _ref.data;
+
+            _this.pizzasOn = data.data;
+        }).catch(function (err) {
+            console.log(err);
+        });
+    },
+
+    methods: {
+        addtoOder: function addtoOder(pizza) {
+            console.log(pizza);
+            this.form.listPizza.push(pizza);
+            this.countPizza++;
+            this.countTotal += pizza.price;
+        }
+    }
+});
+
+/***/ }),
+/* 195 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "row" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-8" }, [
+        _c("h5", [_vm._v("Pedido")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "__container-pizzas" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "__body-pizzas" },
+            _vm._l(_vm.pizzasOn, function(pizza) {
+              return _c(
+                "button",
+                {
+                  key: pizza.id,
+                  staticClass: "btn btn-dark btn-sm mr-2",
+                  on: {
+                    click: function($event) {
+                      _vm.addtoOder(pizza)
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(pizza.name_pizza) +
+                      " $ " +
+                      _vm._s(pizza.price) +
+                      "\n                    "
+                  )
+                ]
+              )
+            })
+          )
+        ]),
+        _vm._v(" "),
+        _c("table", { staticClass: "table" }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.form.listPizza, function(pizza) {
+              return _c("tr", { key: pizza.id })
+            })
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-sm-4" }, [
+        _c("h5", [_vm._v("Detalle de caja")]),
+        _vm._v(" "),
+        _vm._m(3),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "username" } }, [
+            _vm._v("Total de pizzas")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: { type: "text", id: "username", readonly: "" },
+            domProps: { value: _vm.countPizza }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "__pay" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "username" } }, [
+              _vm._v("Total a pagar")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control",
+              attrs: { type: "text", id: "username", readonly: "" },
+              domProps: { value: _vm.countTotal }
+            })
+          ]),
+          _vm._v(" "),
+          _c("button", { staticClass: "btn btn-lg btn-success" }, [
+            _vm._v("Procesar pago")
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "col-sm-12 d-flex justify-content-between nav-controls" },
+      [_c("h5", [_vm._v("Crear nueva ordén")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "__header-pizzas" }, [
+      _vm._v(
+        "\n                    Listado de pizzas disponibles\n                    "
+      ),
+      _c("br"),
+      _vm._v(" "),
+      _c("small", [_vm._v("Presiona para agregar a pedido")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("td", [_vm._v("#")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Pizza")]),
+      _vm._v(" "),
+      _c("td", [_vm._v("Monto")]),
+      _vm._v(" "),
+      _c("td")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("label", { attrs: { for: "username" } }, [_vm._v("Cajero")]),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: { type: "text", id: "username", readonly: "" }
+      })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-cccc4e98", module.exports)
+  }
+}
+
+/***/ }),
+/* 196 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(197);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(188)("1f12212f", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cccc4e98\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./NewOrderComponent.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-cccc4e98\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./NewOrderComponent.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 197 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(169)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.__container-pizzas{\n    padding: 10px 10px;\n    background: #eee;\n    border-radius: 5px;\n    border-bottom: 2px solid #ffdd77;\n}\n.__container-pizzas  .__header-pizzas{\n    padding: 5px;\n}\n.__container-pizzas .__body-pizzas{\n    padding: 10px 0;\n}\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);
