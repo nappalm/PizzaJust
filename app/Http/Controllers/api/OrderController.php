@@ -46,8 +46,6 @@ class OrderController extends Controller
             'user_id' => $request['iduser'],
             'total' => $request['total'],
             'pizzas' => $request['pizzas'],
-            // 'created_at' => date('Y-m-d H:i:s'),
-            // 'updated_at' => date('Y-m-d H:i:s')
         ]);
 
         $listPizzas = $request['listPizza'];
@@ -57,8 +55,6 @@ class OrderController extends Controller
                 'order_id' => $order->id,
                 'pizza_id' => $listPizzas[$i]['id'],
                 'price' => $listPizzas[$i]['price'],
-                // 'created_at' => date('Y-m-d H:i:s'),
-                // 'updated_at' => date('Y-m-d H:i:s')
             ]);
         }
 
