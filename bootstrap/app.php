@@ -13,6 +13,7 @@
 
 $app = new Illuminate\Foundation\Application(
     dirname(__DIR__)
+    // presentar una solucion temporal de datos
 );
 
 /*
